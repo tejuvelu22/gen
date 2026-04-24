@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article class="paper">
+  <h2>Student Work Paper</h2>
+  <p><strong>Textbook:</strong> {{ paper['textbook_title'] }}</p>
+  <p><strong>Page:</strong> {{ paper['page_number'] }}</p>
+  <p><strong>Exercise:</strong> {{ paper['exercise_label'] }}</p>
+
+  <hr />
+
+  <h3>Problem</h3>
+  <div class="math-block">$$ {{ paper['problem_latex'] }} $$</div>
+
+  <h3>Step-by-step work</h3>
+  <div class="math-block">$$ \begin{aligned} {{ paper['solution_latex'] }} \end{aligned} $$</div>
+</article>
+{% endblock %}

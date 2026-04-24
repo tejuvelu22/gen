@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card">
+  <h2>{{ textbook['title'] }}</h2>
+  <p>Original file: {{ textbook['original_filename'] }}</p>
+  <p>
+    <a href="{{ url_for('uploaded_file', filename=textbook['stored_filename']) }}" target="_blank">
+      Open stored PDF
+    </a>
+  </p>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card">
+  <h2>Upload Textbook PDF</h2>
+  <form action="{{ url_for('upload_textbook') }}" method="post" enctype="multipart/form-data">
+    <label>
+      Textbook title
+      <input type="text" name="title" placeholder="Algebra I - Chapter Book" required />
+    </label>
+    <label>
+      PDF file
+      <input type="file" name="pdf" accept="application/pdf" required />
+    </label>
+    <button type="submit">Store textbook in SQL workflow</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Stored Textbooks</h2>
+  {% if textbooks %}
+    <ul>
+      {% for book in textbooks %}
+        <li>
+          <a href="{{ url_for('view_textbook', textbook_id=book['id']) }}">{{ book['title'] }}</a>
+          <small>({{ book['original_filename'] }})</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No textbooks uploaded yet.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>Stored Papers</h2>
+  {% if papers %}
+    <ul>
+      {% for paper in papers %}
+        <li>
+          <a href="{{ url_for('view_paper', paper_id=paper['id']) }}">
+            {{ paper['textbook_title'] }} — Page {{ paper['page_number'] }} — {{ paper['exercise_label'] }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No generated papers yet.</p>
+  {% endif %}
+</section>
+{% endblock %}
