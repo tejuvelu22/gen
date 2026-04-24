@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="card">
+  <h2>Create Exercise Paper</h2>
+  <p>
+    Enter the textbook, page number, and exercise label, then paste the problem using LaTeX syntax
+    (use exponent format like <code>x^2</code> instead of arrows).
+  </p>
+
+  <form method="post" action="{{ url_for('create_paper') }}">
+    <label>
+      Textbook
+      <select name="textbook_id" required>
+        <option value="">Select textbook</option>
+        {% for book in textbooks %}
+          <option value="{{ book['id'] }}">{{ book['title'] }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>
+      Page number
+      <input type="number" name="page_number" min="1" required />
+    </label>
+
+    <label>
+      Exercise / Problem label
+      <input type="text" name="exercise_label" placeholder="Exercise 4.2, #9" required />
+    </label>
+
+    <label>
+      Problem statement (LaTeX)
+      <textarea name="problem_latex" rows="8" required placeholder="Solve: x^2 - 5x + 6 = 0"></textarea>
+    </label>
+
+    <button type="submit">Generate and store paper</button>
+  </form>
+</section>
+{% endblock %}
